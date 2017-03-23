@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action="http://127.0.0.1:1776/search" method="POST" name="restaurantData" id="restaurantData">
+    	<label>Enter Zip Code</label>
+    	<input type="number" name="zipCode">
+    	<button type="SUBMIT">Get Data</button>
+    </form>
+  </body>
+</html>
