@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYC Restaurant Lookup</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+  	<header>
+  		<nav>
+  		</nav>
+  	</header>
+  	<main>	
+	    <h1> <%=results.length %> Results</h1>
+		<ol>
+			<% results.forEach(function(result) { %>
+			<li> <%= result.name %>,ADDRESS: <%= result.address %> VIOLATION COUNT: <%= result.violationList.length %> CURRENT GRADE: <%=result.grade %>
+				<ol>
+				 <% result.violationList.forEach(function(violation){ %>
+					 <li> <%= violation.description %> <strong> <%= violation.date %></strong></li>
+				<% }); %>	 
+				 </ol>		 
+			<% }); %>
+			</li>		
+		</ol>
+
+    </main>
+  </body>
+</html>
