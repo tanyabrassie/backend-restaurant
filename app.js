@@ -10,6 +10,8 @@ var ejs = require('ejs');
 //require new routes
 var index = require('./routes/index');
 var search = require('./routes/search');
+var emailSignUp = require('./routes/emailSignUp');
+
 
 var app = express();
 
@@ -30,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //use routes
 app.use('/', index);
 app.use('/', search);
+app.use('/', emailSignUp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

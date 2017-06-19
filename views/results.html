@@ -3,11 +3,23 @@
   <head>
     <title>NYC Restaurant Lookup</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
 
   <body>
   	<header>
   		<nav>
+  			<button id="about-btn">Get Alerts</button>
+  			<div id="about-text">
+  				<p>Restaurant App is the hip new app taking the big APPle by storm! Find out if the
+  				restaurants you know and love are plagued with violations or if they're spic and span! Sign up to get alerts now!</p>
+  				<form action="/emailSignUp" method="post" name="EmailForm" id="EmailForm">
+  					<label for="emailAddress">
+  					<input type="text" name="emailAddress" id="EmailInput"/>
+  					<button id="modal-btn">Sign Me Up!</button>
+  				</form>
+          <div id="response"></div>
+  			</div>
   		</nav>
   	</header>
   	<main>	
@@ -26,4 +38,5 @@
 
     </main>
   </body>
+  <script type="text/javascript" src="/javascripts/scripts.js"></script>
 </html>

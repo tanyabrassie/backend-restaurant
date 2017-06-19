@@ -1,8 +1,19 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  position: relative;
 }
 
 a {
   color: #00B7FF;
+}
+
+
+#about-text {
+	display: none;
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	background-color: #fff;
+	border: 5px solid red;
 }

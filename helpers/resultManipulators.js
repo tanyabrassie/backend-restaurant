@@ -1,13 +1,11 @@
-
 var resultManipulators = {
 
 	formatResults: function(data) {
-
+		
 		var sortedResults = [];
 
 
-		data.forEach(function(violation) {
-
+		data.forEach(function (violation)  {
 			var addedFlag = false;
 
 			//making the date a real date
@@ -90,7 +88,7 @@ var resultManipulators = {
 	},
 
 	
-	dateSorter: function(sortedResults) {
+	dateSorter: (sortedResults) => {
 
 		sortedResults.forEach(function(restaurant){
 
