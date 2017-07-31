@@ -11,11 +11,11 @@ router.post('/search', function (req, res, next){
 	var postData = {
 		zipcode: req.body.zipCode,
 		restaurantName: req.body.restaurantName,
-		miles: req.body.miles,
 		grade: req.body['grade[]']
 	};
 
 	console.log(postData.zipcode);
+
 
 	//restaurant name only 
 	if (postData.restaurantName) {
@@ -52,19 +52,21 @@ router.post('/search', function (req, res, next){
 			var sortedResults = resultManipulators.formatResults(data);
 
 			res.render('results', {results: sortedResults});
+			//res.send("hello");
 
 		});
 
 	//zipcode only 
 
-	} else if (postData.zipcode && postData.miles.length == 0 && postData.grade == undefined) {
+	} else if (postData.zipcode && postData.grade == undefined) {
 
 		request('https://data.cityofnewyork.us/resource/9w7m-hzhe.json?zipcode=' + postData.zipcode +'&&$limit=10000', function (error, response, body) {
-		
+			
 			var data = JSON.parse(body);
 			var sortedResults = resultManipulators.formatResults(data);
 
 			res.render('results', {results: sortedResults});
+			//res.send("HTTPARTY FUK YEH!");
 
 		});
 
@@ -72,33 +74,29 @@ router.post('/search', function (req, res, next){
 
 		var gradeFormat = "(";
 
-		postData.grade.forEach(function(grade, index) {
+		if (typeof postData.grade == "string") {
+			gradeFormat = "('"+postData.grade+"')";
+		} else {
 
-			if (postData.grade.length == 1) {
+			postData.grade.forEach(function(grade, index) {
 
-				gradeFormat = "('"+grade+"')";
-			}
+				if (index == postData.grade.length-1) {
 
-			else if (index == postData.grade.length-1) {
+					gradeFormat += " '" + grade + "')";
+				
+				} else {
 
-				gradeFormat += " '" + grade + "')";
-			
-			} else {
-
-				gradeFormat += " '" + grade + "',";
-			}
-
-			
-
-		});
+					gradeFormat += " '" + grade + "',";
+				}
+			});
+		}		
 
 		request("https://data.cityofnewyork.us/resource/9w7m-hzhe.json?$where=grade in" + gradeFormat + " AND zipcode='" + postData.zipcode + "'", function (error, response, body){
 
 			var data = JSON.parse(body);
 
 			var sortedResults = resultManipulators.formatResults(data);
-
-			
+	
 			res.render('results', {results: sortedResults});
 
 

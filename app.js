@@ -5,12 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 
 
 //require new routes
 var index = require('./routes/index');
 var search = require('./routes/search');
 var emailSignUp = require('./routes/emailSignUp');
+var createAccount = require('./routes/createAccount');
+var addUser = require('./routes/addUser');
+
 
 
 var app = express();
@@ -33,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/', search);
 app.use('/', emailSignUp);
+app.use('/', addUser);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,5 +57,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+// Connection URL
+
 
 module.exports = app;

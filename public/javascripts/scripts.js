@@ -12,7 +12,10 @@ button.click(function(){
 	if (!showModal) {
 		modal.css('display', 'block');
 		showModal = true;
-	}
+	} else {
+        modal.css('display', 'none');
+        showModal = false;
+    }
 });
 
 
@@ -27,12 +30,11 @@ button.click(function(){
 
 
 
-
 form.submit(function(event){
 
 	event.preventDefault();
 	console.log("submitting");
-	var responseMessage = $('#response');
+    var responseMessage = $('#response');
 
 	var emailAddress = input.val();
 
