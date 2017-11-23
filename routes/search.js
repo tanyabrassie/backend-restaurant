@@ -4,43 +4,18 @@ var request = require('request');
 var restaurantCache = require('../helpers/restaurantCache');
 var resultManipulators = require('../helpers/resultManipulators');
 
-
-
 router.post('/search', function (req, res, next){
-
+    
 	var postData = {
 		zipcode: req.body.zipCode,
 		restaurantName: req.body.restaurantName,
 		grade: req.body['grade[]']
 	};
-
-	console.log(postData.zipcode);
-
-
+    
 	//restaurant name only 
 	if (postData.restaurantName) {
 
-		//OLD CODE FOR CACHING IDEA.
-		// if (restaurantCache.hasData() ) {
-
-		// 	var data = restaurantCache.getData();
-		
-		// } else {
-
-		// 	request('https://data.cityofnewyork.us/resource/9w7m-hzhe.json?$where=dba like '%25CARACAS%25'', function (error, response, body) {
-			
-		// 		var data = JSON.parse(body);
-
-		// 		restaurantCache.save(data);
-
-		// 		console.log(data.length);
-		// 		res.send(data);
-
-		// 	});
-
-		// }
-
-
+        console.log(postData.restaurantName);
 		var capitalizedName = postData.restaurantName.toUpperCase().replace("'", "''");
 
 		request("https://data.cityofnewyork.us/resource/9w7m-hzhe.json?$where=dba like'%25"+ capitalizedName + "%25' ", function (error, response, body){
@@ -49,11 +24,9 @@ router.post('/search', function (req, res, next){
 
 			//run data through the format results function, giving to it the date sorter function as a callback. This returns the 
 			//results reformatted violations sorted by most recent.
-			var sortedResults = resultManipulators.formatResults(data);
-
-			res.render('results', {results: sortedResults});
-			//res.send("hello");
-
+            var sortedResults = resultManipulators.formatResults(data);
+            console.log(sortedResults);
+            res.json(sortedResults);
 		});
 
 	//zipcode only 
@@ -98,7 +71,6 @@ router.post('/search', function (req, res, next){
 			var sortedResults = resultManipulators.formatResults(data);
 	
 			res.render('results', {results: sortedResults});
-
 
 		});
 	}

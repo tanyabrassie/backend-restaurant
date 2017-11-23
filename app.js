@@ -17,7 +17,6 @@ var createAccount = require('./routes/createAccount');
 var addUser = require('./routes/addUser');
 
 
-
 var app = express();
 
 // view engine setup
@@ -33,6 +32,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// allow local client to make requests to API
+app.use(function enableCORSMiddleware (req,res,next) {
+    res.header('Access-Control-Allow-Origin', "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 //use routes
 app.use('/', index);
