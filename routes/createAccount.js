@@ -1,12 +1,10 @@
-// var express = require('express');
-// var router = express.Router();
-// var MongoClient = require('mongodb').MongoClient;
-// var assert = require('assert');
+var express = require('express');
+var router = express.Router();
+var request = require('request');
 
-// router.get('/createAccount', function(req, res, next) {
+router.post('/createAccount', function(req, res, next) {
+    console.log(req);
 
-// 	res.render('createAccount', { title: 'Create Account' });
-// });
+});
 
-
-// module.exports = router;
+module.exports = router;

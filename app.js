@@ -44,6 +44,7 @@ app.use(function enableCORSMiddleware (req,res,next) {
 //use routes
 app.use('/', index);
 app.use('/', search);
+app.use('/', createAccount);
 app.use('/', emailSignUp);
 app.use('/', addUser);
 
